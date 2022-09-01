@@ -44,15 +44,15 @@ function calc(){
     display.textContent = (Operate(Number(values[0]), Number(values[1]), operator))
     values = [];
     console.log(values)
-  }
-  values.push(display.textContent)
+  } else {
+    values.push(display.textContent)}
   return;
 }
 buttons.forEach(button => button.addEventListener('click', function(e){
   const val = e.target;
   if(oper.includes(val.id)){
     previous = val.textContent;
-    assign(val.id)
+    assign(this.id)
     return
   }
 
@@ -60,6 +60,7 @@ buttons.forEach(button => button.addEventListener('click', function(e){
     display.textContent = "";
     displayValue = ""
     previous = ""
+    values = []
     return
   }
   if (val.id == "equals"){
