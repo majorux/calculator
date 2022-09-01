@@ -23,21 +23,19 @@ const display = document.querySelector("#display")
 let displayValue = ""
 let buttons = document.querySelectorAll('button');
 let values = [];
-const oper = ["add", "subtract", "multiply", "divide"]
+const operatorList = ["add", "subtract", "multiply", "divide"]
 let previous = ""
 
-function assign(a){
-  if(a == "add"){
+function assign(buttonId){
+  if(buttonId == "add"){
     operator = Add
-  }else if(a == "subtract"){
+  }else if(buttonId == "subtract"){
     operator = Subtract;
-  }else if(a == "multiply"){
+  }else if(buttonId == "multiply"){
     operator = Multiply;
-  }else if(a == "divide"){
+  }else if(buttonId == "divide"){
     operator = Divide
   }
-
-  calc();
 }
 function calc(){
   if(values.length == 2){
@@ -50,8 +48,13 @@ function calc(){
 }
 buttons.forEach(button => button.addEventListener('click', function(e){
   const val = e.target;
-  if(oper.includes(val.id)){
+  if(operatorList.includes(val.id)){
+    if(operatorList.includes(previous)){
+      assign(this.id)
+      return
+    }
     previous = val.textContent;
+    calc()
     assign(this.id)
     return
   }
